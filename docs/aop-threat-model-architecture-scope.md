@@ -87,6 +87,26 @@ Answer:
 
 Residual risk: slow, low-and-slow manipulation of frequencies. The drift-detection and periodic-review obligations (NM-CTL-4, NM-VER-5) exist for exactly this; recalibration is itself a reviewed event.
 
+### T6: The guardrail or policy bundle compromised
+
+Attack: the enforcement point itself is the adversary, through a modified policy bundle, a tampered harness deploy, or a signing key compromise. Every check above assumes the checker is honest; this threat removes the assumption.
+
+Path: bundle source -> signing -> harness load -> enforcement.
+
+Answer: signed versioned bundles with rollback (ARC-TB1); digest verification at load and per-run attribution in the case record; separation of duties among author, ratifier and operator (ARC-TB3), so no single role can both write and approve a bundle; external anchoring (ARC-TB2) makes wholesale log replacement visible; emergency stop (SEC-15) lets a named role halt the domain without operator tools.
+
+Residual risk: compromise of the signing key itself. Key custody is a named deployment obligation (ARC-TB2); the architecture keeps the blast radius visible by recording which bundle version authorised every run.
+
+### T7: Case-record truncation or wholesale tampering
+
+Attack: the append-only property is defeated not by editing an entry but by replacing or truncating the record store, or by selective deletion between anchoring points.
+
+Path: record store -> harness operator or platform compromise -> audit void.
+
+Answer: the hash chain detects intra-file edits (SEC-8, HAR-6 breaks on a single edit); external anchoring of the chain head (ARC-TB2) detects truncation and wholesale replacement; retention obligations (CG-O6) and audited access (CG-O7) bound who can touch the store at all. Replay (SEC-10) against an independently held copy of any case's bundle makes selective deletion evident.
+
+Residual risk: the anchoring store itself. It sits outside the harness estate precisely so that compromising both requires separate failures.
+
 ## 3. What this model does not cover
 
 - Platform security of the host estate (identity, network, key management beyond the broker boundary). The architecture assumes it is present and hardens the AOP-specific paths on top of it.

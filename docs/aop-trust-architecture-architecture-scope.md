@@ -81,6 +81,18 @@ ARC-R2: Verification outcomes are distinct: `verified`, `partially_verified`, `n
 
 ARC-R3: Where recovery fails, the run reaches the declared safe state and escalates. A run never ends silently in an unknown state.
 
-## 6. What the trust architecture does not fix
+## 6. The trust base
+
+The guardrail, the credential broker and the case record are the root of trust, and their own protection is part of the architecture, not a deployment detail.
+
+ARC-TB1: Policy bundles are signed and versioned, and rollback is a supported operation. A harness verifies the bundle digest of the AOP version it binds before the first run; a bundle that fails verification is not loaded, and the domain holds (SEC-14). The signing scheme and the key ceremony are deployment obligations with named interfaces; the reference harness records the bundle digest in the case record so every run is attributable to a verified bundle.
+
+ARC-TB2: Key custody for the signing keys and external anchoring of the case record (periodic digest commitment to a store outside the harness estate) are named deployment obligations. The case record's hash chain detects tampering within the file (SEC-8); external anchoring detects replacement of the whole file.
+
+ARC-TB3: Separation of duties: the AOP author, the ratifier and the harness operator are distinct roles. One person holding all three is the single point at which a confused AOP, a rubber-stamped ratification and a widened boundary become the same event. The document-level expression is the governance block's prepared_by and ratified_by (CC-23) and the accountable owner (NM-GOV-1).
+
+ARC-TB4: The emergency stop (SEC-15) is part of the trust base: halting the domain is a governed action with its own record, and resumption requires the accountable owner. A stop that required no record and no owner would be a bypass wearing a safety hat.
+
+## 7. What the trust architecture does not fix
 
 The concrete guardrail implementation, the credential broker, the escalation dispatch and the evidence bundle writer belong to `aop-reference-harness`. The threat model that motivates each mechanism is in the threat model document. The normative clauses that bind every implementation are in `aop-spec`.
