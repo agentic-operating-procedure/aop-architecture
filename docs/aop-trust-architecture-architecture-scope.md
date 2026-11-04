@@ -81,6 +81,16 @@ ARC-R2: Verification outcomes are distinct: `verified`, `partially_verified`, `n
 
 ARC-R3: Where recovery fails, the run reaches the declared safe state and escalates. A run never ends silently in an unknown state.
 
+## 5a. The observation plane
+
+ARC-OP1: The trust boundary covers the entire observation plane: capture connectors, normalisation, stitching, graph storage, compiler reads, administrators and exports. The substrate-not-writable-by-agents assumption (T5) is enforced at storage and API boundaries, not assumed.
+
+ARC-OP2: Source events carry authenticated source identity with key rotation and revocation for connectors; integrity metadata detects forgery, replay, deletion and unauthorised relinking; stitching verifies both (CG-S17).
+
+ARC-OP3: Provenance failure quarantines (CG-O11): compilation consuming quarantined material fails closed. Quarantine is a recoverable incident with its own record.
+
+ARC-OP4: Administrators are principals too: graph administration is role-scoped and audited (CG-O7), and a graph administrator cannot silently re-stitch historical cases; re-stitching is a versioned, recorded operation.
+
 ## 6. The trust base
 
 The guardrail, the credential broker and the case record are the root of trust, and their own protection is part of the architecture, not a deployment detail.

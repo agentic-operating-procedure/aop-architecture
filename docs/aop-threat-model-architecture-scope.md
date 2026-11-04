@@ -107,6 +107,16 @@ Answer: the hash chain detects intra-file edits (SEC-8, HAR-6 breaks on a single
 
 Residual risk: the anchoring store itself. It sits outside the harness estate precisely so that compromising both requires separate failures.
 
+### T8: Observation plane compromise
+
+Attack: a compromised capture connector, a forged event stream, or an unauthorised graph write poisons the substrate: the next compile encodes the attacker's behaviour with clean-looking provenance, and drift detection learns the attacker's pattern as normal.
+
+Path: capture connectors -> normalisation -> stitching -> graph storage -> compile.
+
+Answer: authenticated source identity with connector key rotation (ARC-OP2); integrity metadata verified at stitching (CG-S17); provenance failure quarantines and fails compilation closed (CG-O11, ARC-OP3); agents cannot write the corpus (enforced at storage and API boundaries, ARC-OP1); administrators are audited principals whose re-stitching is versioned (ARC-OP4); and the ratification gate (NM-AUT-7, NM-AUT-10) means even poisoned output cannot grant authority without a human act on a reviewed corpus.
+
+Residual risk: a slow, provenance-clean manipulation inside declared capture surfaces. The drift profile's coverage-drift class (CG-D1) and the periodic review obligations exist for exactly this; the reservoir (CR-013) bounds how much of the baseline agent or attacker behaviour can move.
+
 ## 3. What this model does not cover
 
 - Platform security of the host estate (identity, network, key management beyond the broker boundary). The architecture assumes it is present and hardens the AOP-specific paths on top of it.
