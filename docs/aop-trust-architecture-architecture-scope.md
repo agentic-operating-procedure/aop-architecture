@@ -91,6 +91,16 @@ ARC-OP3: Provenance failure quarantines (CG-O11): compilation consuming quaranti
 
 ARC-OP4: Administrators are principals too: graph administration is role-scoped and audited (CG-O7), and a graph administrator cannot silently re-stitch historical cases; re-stitching is a versioned, recorded operation.
 
+## 5b. Incident response and the identity boundary
+
+ARC-IR1: The Detect/Respond/Recover lifecycle: an incident (credential compromise, tool compromise, malicious AOP, observation tampering, policy-service outage, partially completed side effect) is declared by a named role; declaration holds the domain at the enforcement point; recovery requires the integrity check to pass and the accountable owner's resumption decision (SEC-15).
+
+ARC-IR2: Active-case handling per action class: safe hold, cancel, continue under the pinned prior authorisation, or migrate. Migration creates a linked new run and never rewrites the original record (RA-23); approvals taken under a materially changed AOP, context or component set are invalidated and re-taken.
+
+ARC-WS1: Workload identity: every run executes under an authenticated workload identity bound to the AOP version, case scope and action class; credentials are unusable across workloads, runs, tenants and action classes (SEC-16). The model context never holds them.
+
+ARC-WS2: Egress is deny-by-default per declared deployment profile, with allowlists for inference, approved tools, identity and audit services. Child processes and plugins inherit or narrow the boundary. The non-bypassability tests belong to the deployment profile's conformance fixtures (SEC-17); blanket network denial is not required.
+
 ## 6. The trust base
 
 The guardrail, the credential broker and the case record are the root of trust, and their own protection is part of the architecture, not a deployment detail.
