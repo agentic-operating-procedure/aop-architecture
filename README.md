@@ -7,7 +7,7 @@
 | Authority | The reference architecture: layers, trust boundaries, pipeline, topologies, threat model |
 | Tier | Architecture |
 | Landing wave | 2 |
-| Version | 0.2.0 |
+| Version | 0.3.0 |
 | Status | Stable |
 | Licence | MIT |
 

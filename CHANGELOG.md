@@ -4,6 +4,14 @@ All notable changes to this repository are documented here. Format follows [Keep
 
 ## [Unreleased]
 
+## [v0.3.0] - 2026-11-05
+
+### Added (Wave H3: CR-022/025)
+
+- ARC-IR1/IR2: the Detect/Respond/Recover lifecycle and active-case handling.
+- ARC-WS1/WS2: workload identity and deny-by-default egress profiles.
+
+
 ## [v0.2.0] - 2026-11-05
 
 ### Added (Wave H2: CR-020)
@@ -31,7 +39,8 @@ All notable changes to this repository are documented here. Format follows [Keep
 - Published the threat model: the trust assumptions, the four primary threats (malicious or confused AOP, compromised agent, credential leak, prompt injection into the procedure) plus substrate poisoning, and the mechanism answering each.
 - Named the interfaces that Phases 4 and 5 implement against, closing the Phase 3 interface obligation for this repository's tier.
 
-[Unreleased]: https://github.com/agentic-operating-procedure/aop-architecture/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/agentic-operating-procedure/aop-architecture/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/agentic-operating-procedure/aop-architecture/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/agentic-operating-procedure/aop-architecture/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/agentic-operating-procedure/aop-architecture/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/agentic-operating-procedure/aop-architecture/releases/tag/v0.1.0
